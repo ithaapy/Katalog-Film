@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="katalog" class="h-full bg-base-200">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ $title }} - Katalog Film Indonesia</title>
+    @vite('resources/css/app.css')
+</head>
+<body class="min-h-full">
+
+    <x-navbar></x-navbar>
+
+    @unless (request()->routeIs('home', 'about', 'detail'))
+    <x-header>{{ $title }}</x-header>
+    @endunless
+
+    <main>
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            {{ $slot }}
+        </div>
+    </main>
+
+</body>
+</html>
