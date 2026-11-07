@@ -8,7 +8,13 @@
 
     <x-slot:title>{{ $title }}</x-slot:title>
 
-
+        @if ($q)
+        <p class="mb-6 text-sm text-base-content/70">
+            Hasil pencarian untuk <strong class="text-base-content">“{{ $q }}”</strong>:
+            {{ $films->count() }} film ditemukan.
+            <a href="{{ route('katalog') }}" class="ml-2 font-medium text-accent hover:underline">Hapus pencarian</a>
+        </p>
+        @endif
     {{-- 
         FILTER GENRE:
         Menampilkan pilihan kategori/genre yang bisa dipilih oleh user.
@@ -116,7 +122,7 @@
                 pesan ini akan ditampilkan.
             --}}
             <p class="col-span-full text-center">
-                Tidak ada film untuk genre ini.
+                Tidak ada film yang ditemukan.
             </p>
 
         @endforelse

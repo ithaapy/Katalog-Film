@@ -35,19 +35,28 @@ class FilmController extends Controller
     // Mengambil pilihan genre yang dikirim oleh user dari URL.
     $genre_dipilih = $request->query('genre');
 
+    // Mengambil kata kunci pencarian dari URL (kolom search di navbar).
+    $q = trim((string) $request->query('q'));
+
+    // Memulai pertanyaan ke tabel films. Belum dijalankan.
+    $query = Film::query();
+
     // Jika user memilih genre, Controller melakukan filter berdasarkan genre tersebut.
     if ($genre_dipilih) {
-        // Model mencari film yang genrenya sesuai dengan pilihan user.
-        $films = Film::where('genre', 'like', '%' . $genre_dipilih . '%')->get();
-    } else {
-        // Jika tidak ada filter, Model mengambil semua data film.
-        $films = Film::all();
+        $query->where('genre', 'like', '%' . $genre_dipilih . '%');
+    }
+
+    // Jika user mengetik kata kunci, Controller mencari film yang judulnya mengandung kata itu.
+    if ($q !== '') {
+        $query->where('judul', 'like', '%' . $q . '%');
     }
 
     // Mengirim hasil filter dan data genre ke View katalog.
     return view('katalog', [
         'title' => 'Katalog Film',
-        'films' => $films,
+
+        // Menjalankan pertanyaan di atas dan mengambil hasilnya dari Model.
+        'films' => $query->get(),
 
         // Mengambil semua genre dari database.
         // Satu film bisa memiliki lebih dari satu genre, misalnya "Drama, Action".
@@ -68,6 +77,9 @@ class FilmController extends Controller
         // Mengirim genre yang sedang dipilih user
         // agar View mengetahui filter yang sedang digunakan.
         'genre_dipilih' => $genre_dipilih,
+
+        // Mengirim kata kunci pencarian agar View bisa menampilkannya.
+        'q' => $q,
     ]);
 }
 
