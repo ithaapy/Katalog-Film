@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;  
 
 class Film extends Model
 {
@@ -20,7 +21,8 @@ class Film extends Model
         'tanggal_rilis',
         'rating',
         'poster',
-        'sinopsis'
+        'sinopsis',
+        'category_id'
     ];
 
     // Mengatur tipe data dari kolom tertentu.
@@ -29,4 +31,9 @@ class Film extends Model
         'tanggal_rilis' => 'date',
         'rating' => 'decimal:1',
     ];
+
+        public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

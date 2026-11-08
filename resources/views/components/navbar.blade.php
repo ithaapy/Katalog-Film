@@ -25,7 +25,7 @@
         {{-- Menu tengah: hanya di layar besar --}}
         <nav class="navbar-center hidden gap-10 lg:flex" aria-label="Menu utama">
             <x-nav-link href="{{ route('home') }}" :active="request()->routeIs('home')">Home</x-nav-link>
-            <x-nav-link href="{{ route('katalog') }}" :active="request()->routeIs('katalog', 'detail')">Katalog</x-nav-link>
+            <x-nav-link href="{{ route('katalog') }}" :active="request()->routeIs('katalog', 'detail', 'kategori')">Katalog</x-nav-link>
             <x-nav-link href="{{ route('about') }}" :active="request()->routeIs('about')">About</x-nav-link>
         </nav>
 

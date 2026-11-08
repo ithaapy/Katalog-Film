@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Film;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Category;
 
 /**
  * @extends Factory<Film>
@@ -22,6 +23,7 @@ class FilmFactory extends Factory
         return [
             'judul' => ucwords(fake()->words(3, true)),
             'tahun' => $tanggal->format('Y'),
+            'category_id' => Category::factory(),
             'genre' => fake()->randomElement(['Drama', 'Horor', 'Romantis', 'Aksi', 'Komedi']),
             'tanggal_rilis' => $tanggal->format('Y-m-d'),
             'rating' => fake()->randomFloat(1, 5, 9),

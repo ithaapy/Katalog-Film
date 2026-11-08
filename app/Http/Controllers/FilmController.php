@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Film;
 use Illuminate\Http\Request;
+use App\Models\Category;
 
 class FilmController extends Controller
 {
@@ -80,6 +81,18 @@ class FilmController extends Controller
 
         // Mengirim kata kunci pencarian agar View bisa menampilkannya.
         'q' => $q,
+    ]);
+}
+
+// Halaman Genre: menampilkan semua film dalam satu kategori (genre)
+public function kategori(Category $category)
+{
+    return view('katalog', [
+        'title' => 'Genre: ' . $category->name,
+        'films' => $category->films,
+        'daftar_genre' => Category::orderBy('name')->pluck('name'),
+        'genre_dipilih' => $category->name,
+        'q' => '',
     ]);
 }
 

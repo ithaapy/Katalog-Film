@@ -85,9 +85,11 @@
 
                     {{-- Menampilkan genre film --}}
                     <div class="flex flex-wrap items-center gap-2">
-                        <span class="badge badge-primary">
-                            {{ $film['genre'] }}
-                        </span>
+                        @if ($film->category)
+                            <a href="{{ route('kategori', $film->category->slug) }}" class="badge badge-primary transition hover:opacity-80">{{ $film->category->name }}</a>
+                        @else
+                            <span class="badge badge-primary">{{ $film['genre'] }}</span>
+                        @endif
                     </div>
 
                     {{-- Menampilkan tanggal rilis --}}
